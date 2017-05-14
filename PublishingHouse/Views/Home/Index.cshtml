@@ -1,0 +1,40 @@
+﻿@model PagedList.IPagedList<PublishingHouse.Data.Entities.Article>
+@using PagedList.Mvc;
+
+<style type="text/css">
+    p {
+        line-height: 1.5em;
+        max-height: 4.5em;
+        overflow: hidden;
+    }
+     .searchBox{
+         width: 100%
+     }
+</style>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<div class="row col-md-12 col-xs-12 center-block">
+    <div class="container" style="padding:0px">
+        <div style="margin:10px 10px 10px 0px; width:100%;">
+            @using (Html.BeginForm())
+            {
+                @Html.TextBox("SearchString", "", new { @class = "searchBox" })
+                <button type="submit">Search</button>
+            }
+        </div>
+        <div class="col-lg-8 col-md-8 col-xs-12">
+            @foreach (var article in Model)
+            {
+                <div class="row" style="margin-bottom:5px; padding:0px;">
+                    <h4>@Html.ActionLink(article.Name, "Details", "Home", new { id = article.Id }, null)</h4>
+                    @article.Authors <br />
+                    <p>@article.Annotation</p>
+                </div>
+            }
+            <br />
+        </div>
+        <div class="col-md-12 col-xs-12" style="margin:0px; padding:0px;">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+        </div>
+    </div>
+</div>

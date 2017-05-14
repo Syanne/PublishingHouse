@@ -1,0 +1,40 @@
+﻿@model PublishingHouse.Data.Entities.Article
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <hr />
+    <dl class="dl-horizontal" style="padding-right: 100px;">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Authors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Authors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Annotation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Annotation)
+        </dd>
+        <dd>
+            <br />
+            @Html.ActionLink("Back to List", "Index")
+        </dd>
+    </dl>
+</div>
+<p>
+</p>
