@@ -22,6 +22,12 @@ namespace PublishingHouse.Data
 
             builder.RegisterType<NGramsWriteRepository>()
                 .As<INGramsWriteRepository>();
+
+            builder.RegisterType<SignatureReadRepository>()
+                .As<ISignatureReadRepository>();
+
+            builder.RegisterType<SignatureWriteRepository>()
+                .As<ISignatureWriteRepository>();
         }
     }
 }

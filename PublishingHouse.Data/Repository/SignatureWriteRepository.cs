@@ -1,20 +1,21 @@
 ﻿using PublishingHouse.Data.Entities;
 using PublishingHouse.Data.Repository.Interface;
+using System;
 using System.Threading.Tasks;
 
 namespace PublishingHouse.Data.Repository
 {
-    internal class NGramsWriteRepository : INGramsWriteRepository
+    class SignatureWriteRepository : ISignatureWriteRepository
     {
         DataContext dataContext { get; set; }
-        public NGramsWriteRepository(DataContext dataContext)
+        public SignatureWriteRepository(DataContext dataContext)
         {
             this.dataContext = dataContext;
         }
 
-        public Task AddNGram(NGram ngram)
+        public Task AddSinature(Signature signature)
         {
-            dataContext.NGrams.Add(ngram);
+            dataContext.Signatures.Add(signature);
             return dataContext.SaveChangesAsync();
         }
     }

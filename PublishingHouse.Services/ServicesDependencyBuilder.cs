@@ -12,8 +12,11 @@ namespace PublishingHouse.Services
         {
             // The generic ILogger<TCategoryName> service was added to the ServiceCollection by ASP.NET Core.
             // It was then registered with Autofac using the Populate method in ConfigureServices.
-            builder.RegisterType<NGramService>().As<ISearchService>();
-            builder.RegisterType<NGramAlgorythm>().As<INGramAlgorithm>();
+            //builder.RegisterType<SimplifiedNGramService>().As<ISearchService>();
+            //builder.RegisterType<NGramService>().As<ISearchService>();
+            //builder.RegisterType<NGramAlgorythm>().As<INGramAlgorithm>();
+            builder.RegisterType<SignatureService>().As<ISearchService>();
+            builder.RegisterType<SignatureAlgorithm>().As<ISignatureAlgorithm>();
         }
     }
 }

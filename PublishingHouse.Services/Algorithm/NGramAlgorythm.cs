@@ -1,5 +1,6 @@
 ﻿using PublishingHouse.Services.Algorithm.Interface;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace PublishingHouse.Services.Algorithm
@@ -10,7 +11,7 @@ namespace PublishingHouse.Services.Algorithm
         public IEnumerable<string> GetNGramsCollection(string query)
         {
             var ngram = new List<string>();
-            var words = Regex.Split(query, "[-.?!)(,:]");
+            var words = Regex.Split(query.ToLower(), @"[\s\p{P}]");
 
             foreach (var word in words)
             {
@@ -20,11 +21,6 @@ namespace PublishingHouse.Services.Algorithm
             }
 
             return ngram;
-        }
-        
-        public static int GetNGramSize(int n)
-        {
-            return N;
         }
     }
 }

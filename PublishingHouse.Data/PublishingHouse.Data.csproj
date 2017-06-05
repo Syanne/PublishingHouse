@@ -57,6 +57,16 @@
     <Compile Include="DataDependencyBuilder.cs" />
     <Compile Include="Entities\Article.cs" />
     <Compile Include="Entities\NGrams.cs" />
+    <Compile Include="Entities\Signtature.cs" />
+    <Compile Include="Migrations\201706041940215_Signatures.cs" />
+    <Compile Include="Migrations\201706041940215_Signatures.Designer.cs">
+      <DependentUpon>201706041940215_Signatures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201706041952015_ChangedSignatures.cs" />
+    <Compile Include="Migrations\201706041952015_ChangedSignatures.Designer.cs">
+      <DependentUpon>201706041952015_ChangedSignatures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\ArticleReadRepository.cs" />
     <Compile Include="Repository\ArticleWriteRepository.cs" />
@@ -65,13 +75,24 @@
     <Compile Include="Repository\Interface\IArticleWriteRepository.cs" />
     <Compile Include="Repository\Interface\INGramsReadRepository.cs" />
     <Compile Include="Repository\Interface\INGramsWriteRepository.cs" />
+    <Compile Include="Repository\Interface\ISignatureReadRepository.cs" />
+    <Compile Include="Repository\Interface\ISignatureWriteRepository.cs" />
     <Compile Include="Repository\NGramsReadRepository.cs" />
     <Compile Include="Repository\NGramsWriteRepository.cs" />
+    <Compile Include="Repository\SignatureReadRepository.cs" />
+    <Compile Include="Repository\SignatureWriteRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Entities\Entities.cd" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201706041940215_Signatures.resx">
+      <DependentUpon>201706041940215_Signatures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201706041952015_ChangedSignatures.resx">
+      <DependentUpon>201706041952015_ChangedSignatures.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

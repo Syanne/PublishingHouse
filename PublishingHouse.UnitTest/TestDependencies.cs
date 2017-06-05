@@ -1,11 +1,11 @@
 ﻿using Autofac;
 using PublishingHouse.Data;
-using PublishingHouse.Services;
-using PublishingHouse.Data.Repository.Interface;
-using PublishingHouse.Services.Algorithm.Interface;
-using System;
-using PublishingHouse.Services.Service.Interface;
 using PublishingHouse.Data.Entities;
+using PublishingHouse.Data.Repository.Interface;
+using PublishingHouse.Services;
+using PublishingHouse.Services.Algorithm.Interface;
+using PublishingHouse.Services.Service.Interface;
+using System;
 
 namespace PublishingHouse.UnitTest
 {
@@ -75,6 +75,27 @@ namespace PublishingHouse.UnitTest
             get
             {
                 return AutofacContainer.Resolve<INGramsWriteRepository>();
+            }
+        }
+        protected ISignatureWriteRepository SignatureWriteRepository
+        {
+            get
+            {
+                return AutofacContainer.Resolve<ISignatureWriteRepository>();
+            }
+        }
+        protected ISignatureReadRepository SignatureReadRepository
+        {
+            get
+            {
+                return AutofacContainer.Resolve<ISignatureReadRepository>();
+            }
+        }
+        protected ISignatureAlgorithm SignatureAlgorithm
+        {
+            get
+            {
+                return AutofacContainer.Resolve<ISignatureAlgorithm>();
             }
         }
 

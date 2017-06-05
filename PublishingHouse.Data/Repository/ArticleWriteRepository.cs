@@ -14,7 +14,7 @@ namespace PublishingHouse.Data.Repository
         public ArticleWriteRepository(DataContext dataContext)
         {
             this.dataContext = dataContext;
-            this.articles = this.dataContext.Article;
+            this.articles = this.dataContext.Articles;
         }
 
         public async Task<Article> AddArticle(Article article)
@@ -33,7 +33,7 @@ namespace PublishingHouse.Data.Repository
         public async Task UpdateArticle(Article article)
         {
             var result = await dataContext
-                                .Article
+                                .Articles
                                 .SingleOrDefaultAsync(b => b.Id == article.Id);
 
             if (result != null)

@@ -55,10 +55,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\Interface\INGramAlgorithm.cs" />
+    <Compile Include="Algorithm\Interface\ISignatureAlgorithm.cs" />
     <Compile Include="Algorithm\NGramAlgorythm.cs" />
+    <Compile Include="Algorithm\SignatureAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesDependencyBuilder.cs" />
     <Compile Include="Service\Interface\ISearchService.cs" />
+    <Compile Include="Service\SignatureService.cs" />
+    <Compile Include="Service\SimplifiedNGramService.cs" />
     <Compile Include="Service\NGramService.cs" />
   </ItemGroup>
   <ItemGroup>

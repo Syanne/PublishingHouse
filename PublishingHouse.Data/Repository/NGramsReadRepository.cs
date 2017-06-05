@@ -24,15 +24,14 @@ namespace PublishingHouse.Data.Repository
         public Task<NGram> GetNGram(string ngram)
         {
             return DoGetNGrams()
-                    .Include(nGram => nGram.Articles)
                     .FirstOrDefaultAsync(value => value.NGramValue.ToLower().Contains(ngram.ToLower()));
         }
 
         private IQueryable<NGram> DoGetNGrams()
         {
             return dataContext
-                       .NGram
-                       .Include(n => n.Articles);
+                       .NGrams
+                       .Include(nGram => nGram.Articles);
         }
     }
 }

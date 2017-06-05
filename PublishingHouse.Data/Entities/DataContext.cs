@@ -5,9 +5,10 @@ namespace PublishingHouse.Data.Entities
 {
     public class DataContext: DbContext
     {
-        public DbSet<NGram> NGram { get; set; }
-        public DbSet<Article> Article { get; set; }
-        public DataContext() : base("WebSystem") { }
+        public DbSet<NGram> NGrams { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Signature> Signatures { get; set; }
+        public DataContext() : base("PublishingHouse") { }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -21,6 +22,15 @@ namespace PublishingHouse.Data.Entities
                             cs.ToTable("ArticleNGram");
                         });
 
+            modelBuilder.Entity<Article>()
+                        .HasMany(s => s.Signatures)
+                        .WithMany(c => c.Articles)
+                        .Map(cs =>
+                        {
+                            cs.MapLeftKey("ArticleId");
+                            cs.MapRightKey("SignatureId");
+                            cs.ToTable("ArticleSignature");
+                        });
         }
     }
 }

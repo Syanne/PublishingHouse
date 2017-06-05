@@ -14,7 +14,7 @@ namespace PublishingHouse.Data.Repository
         public ArticleReadRepository(DataContext dataContext)
         {
             this.dataContext = dataContext;
-            this.articles = this.dataContext.Article;
+            this.articles = this.dataContext.Articles;
         }
         public Task<int> CountArticles()
         {
