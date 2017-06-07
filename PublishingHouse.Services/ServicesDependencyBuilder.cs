@@ -14,7 +14,7 @@ namespace PublishingHouse.Services
             // It was then registered with Autofac using the Populate method in ConfigureServices.
             //builder.RegisterType<SimplifiedNGramService>().As<ISearchService>();
             //builder.RegisterType<NGramService>().As<ISearchService>();
-            //builder.RegisterType<NGramAlgorythm>().As<INGramAlgorithm>();
+            builder.RegisterType<NGramAlgorithm>().As<INGramAlgorithm>();
             builder.RegisterType<SignatureService>().As<ISearchService>();
             builder.RegisterType<SignatureAlgorithm>().As<ISignatureAlgorithm>();
         }

@@ -68,5 +68,35 @@ namespace PublishingHouse.UnitTest
             Assert.IsTrue(result.Count() >= 1);
             Assert.IsTrue(result.First().Id == article.Id);
         }
+
+        [TestMethod]
+        public async Task IndexAll()
+        {
+            var result = await ArticleReadRepository.GetArticles(null);
+
+            foreach(var article in result)
+                await SearchService.DoIndexation(article);
+
+            //assert            
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count() >= 1);
+        }
+
+        [TestMethod]
+        public async Task TestOnlySearch()
+        {
+            //arrange
+            var query = "паттерн";
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            //act            
+            var result = await SearchService.DoSearch(query);
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            //assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count() >= 1);
+        }
     }
 }

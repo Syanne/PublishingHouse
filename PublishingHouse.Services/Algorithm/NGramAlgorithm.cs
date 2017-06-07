@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace PublishingHouse.Services.Algorithm
 {
-    public class NGramAlgorythm : INGramAlgorithm
+    public class NGramAlgorithm : INGramAlgorithm
     {
         static int N { get; set; } = 3;
         public IEnumerable<string> GetNGramsCollection(string query)

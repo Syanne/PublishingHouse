@@ -56,7 +56,7 @@
   <ItemGroup>
     <Compile Include="Algorithm\Interface\INGramAlgorithm.cs" />
     <Compile Include="Algorithm\Interface\ISignatureAlgorithm.cs" />
-    <Compile Include="Algorithm\NGramAlgorythm.cs" />
+    <Compile Include="Algorithm\NGramAlgorithm.cs" />
     <Compile Include="Algorithm\SignatureAlgorithm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicesDependencyBuilder.cs" />

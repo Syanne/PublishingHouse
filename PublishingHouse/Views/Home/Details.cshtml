@@ -1,4 +1,4 @@
-﻿@model PublishingHouse.Data.Entities.Article
+﻿@model PublishingHouse.Models.ArticleViewModel
 
 @{
     ViewBag.Title = "Details";
@@ -6,7 +6,7 @@
 
 <div>
     <hr />
-    <dl class="dl-horizontal" style="padding-right: 100px;">
+    <dl class="dl-horizontal col-md-10" style="padding-right: 100px;">
         <dt>
             @Html.DisplayNameFor(model => model.Name)
         </dt>
@@ -32,9 +32,7 @@
         </dd>
         <dd>
             <br />
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink(@Resources.Resource.BackToList, "Index")
         </dd>
     </dl>
 </div>
-<p>
-</p>

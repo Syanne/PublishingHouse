@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<PublishingHouse.Data.Entities.Article>
+﻿@model PagedList.IPagedList<PublishingHouse.Models.ArticleViewModel>
 @using PagedList.Mvc;
 
 <style type="text/css">
@@ -7,19 +7,16 @@
         max-height: 4.5em;
         overflow: hidden;
     }
-     .searchBox{
-         width: 100%
-     }
 </style>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 <div class="row col-md-12 col-xs-12 center-block">
+
     <div class="container" style="padding:0px">
-        <div style="margin:10px 10px 10px 0px; width:100%;">
+        <div style="margin:10px 10px 10px 0px;" class="row">
             @using (Html.BeginForm())
             {
-                @Html.TextBox("SearchString", "", new { @class = "searchBox" })
-                <button type="submit">Search</button>
+                <input type="text" name="SearchString" class="col-lg-8 col-md-8 col-xs-12" style="max-width:1000px" />
             }
         </div>
         <div class="col-lg-8 col-md-8 col-xs-12">

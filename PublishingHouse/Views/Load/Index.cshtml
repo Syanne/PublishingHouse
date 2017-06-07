@@ -1,11 +1,12 @@
-﻿@model PublishingHouse.Data.Entities.Article
+﻿@model PublishingHouse.Models.ArticleViewModel
 <style type="text/css">
     .inputTextField {
-        width:100%;
+        width: 100%;
         min-height: 40px;
     }
 </style>
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Index", "Load", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
@@ -36,10 +37,16 @@
                 @Html.ValidationMessageFor(model => model.Annotation, "", new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group">
+            <label for="file" class="control-label col-md-2">@Resources.Resource.ArticlePath</label>
+            <div class="col-md-10">
+                <input type="file" name="File" id="file" value="" class="form-control col-md-12 col-xs-12"/>
+            </div>
+        </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="@Resources.Resource.Save" class="btn btn-default" />
             </div>
         </div>
     </div>

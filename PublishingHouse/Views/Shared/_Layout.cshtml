@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Publishing House</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
 </head>
 <body style="width:100%">
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -14,18 +15,24 @@
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Publishing House", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(@Resources.Resource.PublichingHouse, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav pull-right">
-                    <li>@Html.ActionLink("Load", "Index", "Load")</li>
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink(@Resources.Resource.MainPage, "Index", "Home")</li>
+                    <li>@Html.ActionLink(@Resources.Resource.LoadPage, "Index", "Load")</li>
                 </ul>
+                <div class="pull-right" style="margin-top:10px">
+                    @using (Html.BeginForm("Index", "Home"))
+                    {
+                        <input type="text" id="SearchString" name="SearchString" value="" placeholder="@Resources.Resource.SearchNav" style="padding-left:3px" class="searchBox" />
+                    }
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content center-block" style="width:100%">
+    <div class="body-content center-block" style="width:100%">
         @RenderBody()
         <hr />
     </div>

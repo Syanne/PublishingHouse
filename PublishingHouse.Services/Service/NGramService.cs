@@ -37,25 +37,18 @@ namespace PublishingHouse.Services.Service
             var query = String.Join(" ", article.Name, article.Authors, article.Annotation);
 
             var nGrams = nGramAlgorithm.GetNGramsCollection(query);
-            var articleNgramsCollection = await nGramsReadRepository.GetNGramCollection(article.Id);
 
             foreach (var nGram in nGrams)
             {
-                var currentNGram = articleNgramsCollection
-                                        .FirstOrDefault(articleNGram => articleNGram.NGramValue.ToLower() == nGram.ToLower());
+               var currentNGram = await nGramsReadRepository.GetNGram(nGram);
 
                 if (currentNGram == null)
                 {
-                    currentNGram = await nGramsReadRepository.GetNGram(nGram);
-
-                    if (currentNGram == null)
-                    {
-                        currentNGram = new NGram() { NGramValue = nGram };
-                        await nGramsWriteRepository.AddNGram(currentNGram);
-                    }
-
-                    article.NGrams.Add(currentNGram);
+                    currentNGram = new NGram() { NGramValue = nGram };
+                    await nGramsWriteRepository.AddNGram(currentNGram);
                 }
+
+                article.NGrams.Add(currentNGram);
             }
 
             await articleWriteRepository.UpdateArticle(article);
@@ -68,7 +61,7 @@ namespace PublishingHouse.Services.Service
                 return await articleReadRepository.GetArticles(null);
             }
 
-            var articles = new List<Article>();        
+            var articles = new List<Article>();
             var nGrams = nGramAlgorithm.GetNGramsCollection(query);
 
             foreach (var nGram in nGrams)

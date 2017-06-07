@@ -14,20 +14,27 @@ namespace PublishingHouse.UnitTest
         {
             //arrange
             var query = "Алгоритм";
+            int NGramCount = 6;
 
             //act            
             var result = NGramAlgorithm.GetNGramsCollection(query);
 
             //assert   
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Count() == 6);
+            Assert.IsTrue(result.Count() == NGramCount);
         }
 
         [TestMethod]
         public async Task TestIndexationNGramAlgorythm()
         {
             //arrange
-            var article = new Article { Name = "Work with repository", Annotation = "Here we add some annotation", Authors = "May Green", ArticlePath = "somepath\\here" };
+            var article = new Article
+            {
+                Name = "Заместитель",
+                Annotation = "Паттерн Заместитель (Proxy) предоставляет объект-заместитель, который управляет доступом к другому объекту. То есть создается объект-суррогат, который может выступать в роли другого объекта и замещать его",
+                Authors = "Кори Кормонар",
+                ArticlePath = "somepath\\here"
+            };
             await ArticleWriteRepository.AddArticle(article);
 
             //act            
@@ -43,12 +50,18 @@ namespace PublishingHouse.UnitTest
         public async Task TestSearchNGramAlgorythm()
         {
             //arrange
-            var article = new Article { Name = "Створена біла мережа", Annotation = "Оперета", Authors = "Martha Green", ArticlePath = "somepath\\here" };
+            var article = new Article
+            {
+                Name = "Методы add и update",
+                Annotation = "Метод remove отличается от метода удаления, определенного в DAO тем, что принимает Account в качестве параметра вместо userName (идентификатора аккаунта). Представление репозитория как коллекции меняет его восприятие. Вы избегаете раскрытия типа идентификатора аккаунта репозиторию. Это сделает вашу жизнь легче в том случае, если вы захотите использовать long для идентрификации аккаунтов.",
+                Authors = "Martha Green",
+                ArticlePath = "somepath\\here"
+            };
 
             var addedArticle = await ArticleWriteRepository.AddArticle(article);
             await SearchService.DoIndexation(article);
 
-            var query = "білаа створена";
+            var query = "Методы отличаются";
 
             //act            
             var result = await SearchService.DoSearch(query);
@@ -63,11 +76,13 @@ namespace PublishingHouse.UnitTest
         public async Task TestSimplifiedSearcNGramAlgorythm()
         {
             //arrange
-            var article = new Article {
+            var article = new Article
+            {
                 Name = "Нова стаття для тестування",
                 Annotation = "Анотація до статті, що буде використано при тестуванні",
                 Authors = "Світлана Вермська",
-                ArticlePath = "somepath\\here" };
+                ArticlePath = "somepath\\here"
+            };
 
             var addedArticle = await ArticleWriteRepository.AddArticle(article);
 
@@ -81,5 +96,22 @@ namespace PublishingHouse.UnitTest
             Assert.IsTrue(result.Count() >= 1);
             Assert.IsTrue(result.First().Id == addedArticle.Id);
         }
-    }
+
+        [TestMethod]
+        public async Task TestOnlySearch()
+        {
+            //arrange
+            var query = "паттерн";
+
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            //act            
+            var result = await SearchService.DoSearch(query);
+
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            //assert
+            Assert.IsNotNull(result);
+            Assert.IsTrue(result.Count() >= 1);
+        }
+    } 
 }

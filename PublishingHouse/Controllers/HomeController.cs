@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using System.Collections.Generic;
 using PagedList;
 using System.Net;
+using PublishingHouse.Models;
 
 namespace PublishingHouse.Controllers
 {
@@ -27,8 +28,8 @@ namespace PublishingHouse.Controllers
         public async Task<ActionResult> Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            var result = await GetArticles();
-            return View(result.ToPagedList(pageNumber, ItemsPerPage));
+            var articles = await GetArticles(); 
+            return View(articles.ToPagedList(pageNumber, ItemsPerPage));
         }
 
         [HttpPost]
@@ -37,9 +38,12 @@ namespace PublishingHouse.Controllers
             if (searchString == string.Empty)
                 page = 1;
 
-            var result = await searchService.DoSearch(searchString);
+            var articles = await searchService.DoSearch(searchString);
+            var result = articles
+                            .Select(CreateArticleViewModel)
+                            .ToPagedList(1, articles.Count());
 
-            return View(result.ToPagedList(1, ItemsPerPage));
+            return View(result);
         }
 
         [HttpGet]
@@ -57,7 +61,7 @@ namespace PublishingHouse.Controllers
                 return HttpNotFound();
             }
 
-            return View(article);
+            return View(CreateArticleViewModel(article));
         }
 
         public ActionResult Error()
@@ -65,12 +69,25 @@ namespace PublishingHouse.Controllers
             return View();
         }
 
-        private async Task<IEnumerable<Article>> GetArticles()
+        private async Task<IEnumerable<ArticleViewModel>> GetArticles()
         {
             var articles = await articleReadRepository.GetArticles(null);
             return articles
                 .Where(article => article.Name != null)
+                .Select(CreateArticleViewModel)
                 .OrderByDescending(artilce => artilce.Id);
+        }
+
+        private ArticleViewModel CreateArticleViewModel(Article article)
+        {
+            return new ArticleViewModel
+            {
+                Id = article.Id,
+                Name = article.Name,
+                Annotation = article.Annotation,
+                File = null,
+                Authors = article.Authors
+            };
         }
     }
 }
