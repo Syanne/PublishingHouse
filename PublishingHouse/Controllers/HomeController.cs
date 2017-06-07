@@ -17,7 +17,7 @@ namespace PublishingHouse.Controllers
         private int ItemsPerPage = 5;
         private readonly IArticleReadRepository articleReadRepository;
         private readonly ISearchService searchService;
-        public HomeController(  IArticleReadRepository articleReadRepository,
+        public HomeController(IArticleReadRepository articleReadRepository,
                                 ISearchService searchService)
         {
             this.articleReadRepository = articleReadRepository;
@@ -28,7 +28,7 @@ namespace PublishingHouse.Controllers
         public async Task<ActionResult> Index(int? page)
         {
             int pageNumber = (page ?? 1);
-            var articles = await GetArticles(); 
+            var articles = await GetArticles();
             return View(articles.ToPagedList(pageNumber, ItemsPerPage));
         }
 
@@ -40,10 +40,11 @@ namespace PublishingHouse.Controllers
 
             var articles = await searchService.DoSearch(searchString);
             var result = articles
-                            .Select(CreateArticleViewModel)
-                            .ToPagedList(1, articles.Count());
+                            .Select(CreateArticleViewModel);
 
-            return View(result);
+            var pageNumber = (result.Count() == 0) ? 1 : result.Count();
+
+            return View(result.ToPagedList(1, pageNumber));           
         }
 
         [HttpGet]
