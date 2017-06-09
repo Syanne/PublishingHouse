@@ -35,10 +35,10 @@ namespace PublishingHouse.Controllers
         [HttpPost]
         public async Task<ActionResult> Search(SearchRequest searchRequset)
         {
-            if (searchRequset.SearchString == string.Empty)
+            if (searchRequset.SearchString == null )
             {
                 var articles = await GetArticles();
-                return View(articles.ToPagedList(1, ItemsPerPage));
+                return View("Index", articles.ToPagedList(1, ItemsPerPage));
             }
             else
             {
