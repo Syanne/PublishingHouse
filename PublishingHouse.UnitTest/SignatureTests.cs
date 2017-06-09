@@ -86,7 +86,7 @@ namespace PublishingHouse.UnitTest
         public async Task TestOnlySearch()
         {
             //arrange
-            var query = "паттерн";
+            var query = "албахари использование потоков";
 
             var watch = System.Diagnostics.Stopwatch.StartNew();
             //act            

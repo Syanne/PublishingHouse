@@ -144,6 +144,9 @@
   <data name="Next" xml:space="preserve">
     <value>Вперед</value>
   </data>
+  <data name="Ngram" xml:space="preserve">
+    <value>N-грамный алгоритм</value>
+  </data>
   <data name="Prev" xml:space="preserve">
     <value>Назад</value>
   </data>
@@ -158,5 +161,11 @@
   </data>
   <data name="SearchNav" xml:space="preserve">
     <value>искать...</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>сигнатурный алгоритм</value>
+  </data>
+  <data name="Trie" xml:space="preserve">
+    <value>trie-дерево</value>
   </data>
 </root>

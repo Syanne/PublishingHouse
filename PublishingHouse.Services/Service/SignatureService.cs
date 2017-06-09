@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using PublishingHouse.Data.Entities;
 using PublishingHouse.Data.Repository.Interface;
@@ -10,7 +9,7 @@ using PublishingHouse.Services.Algorithm.Interface;
 
 namespace PublishingHouse.Services.Service
 {
-    class SignatureService : ISearchService
+    class SignatureService : ISignatureService
     {
         private ISignatureWriteRepository signatureWriteRepository { get; set; }
         private ISignatureReadRepository signatureReadRepository { get; set; }
@@ -62,12 +61,12 @@ namespace PublishingHouse.Services.Service
             }
 
             var articles = new List<Article>();
-            var signatures = signatureAlgorithm.GetSignatures(query);           
+            var signatures = signatureAlgorithm.GetSignatures(query);   
 
             foreach (var signature in signatures)
             {
                 var currentSignature = await signatureReadRepository.GetSignature(signature);
-                if (currentSignature != null)
+                if (currentSignature != null && currentSignature.Hash != signatureAlgorithm.GetDefaultSignature)
                     articles.AddRange(currentSignature.Articles);
             }
 

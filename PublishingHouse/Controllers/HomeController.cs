@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using PagedList;
 using System.Net;
 using PublishingHouse.Models;
+using PublishingHouse.SearchServices;
 
 namespace PublishingHouse.Controllers
 {
@@ -16,9 +17,9 @@ namespace PublishingHouse.Controllers
     {
         private int ItemsPerPage = 5;
         private readonly IArticleReadRepository articleReadRepository;
-        private readonly ISearchService searchService;
+        private readonly ICustomizedSearchService searchService;
         public HomeController(IArticleReadRepository articleReadRepository,
-                                ISearchService searchService)
+                                ICustomizedSearchService searchService)
         {
             this.articleReadRepository = articleReadRepository;
             this.searchService = searchService;
@@ -27,24 +28,25 @@ namespace PublishingHouse.Controllers
         [HttpGet]
         public async Task<ActionResult> Index(int? page)
         {
-            int pageNumber = (page ?? 1);
             var articles = await GetArticles();
-            return View(articles.ToPagedList(pageNumber, ItemsPerPage));
+            return View(articles.ToPagedList(page ?? 1, ItemsPerPage));
         }
-
+        
         [HttpPost]
-        public async Task<ActionResult> Index(string searchString, int? page)
+        public async Task<ActionResult> Search(SearchRequest searchRequset)
         {
-            if (searchString == string.Empty)
-                page = 1;
+            if (searchRequset.SearchString == string.Empty)
+            {
+                var articles = await GetArticles();
+                return View(articles.ToPagedList(1, ItemsPerPage));
+            }
+            else
+            {
+                var articles = await searchService.DoSearch(searchRequset);
+                var page = (articles.Count() == 0) ? 1 : articles.Count();
 
-            var articles = await searchService.DoSearch(searchString);
-            var result = articles
-                            .Select(CreateArticleViewModel);
-
-            var pageNumber = (result.Count() == 0) ? 1 : result.Count();
-
-            return View(result.ToPagedList(1, pageNumber));           
+                return View("Index", articles.Select(CreateArticleViewModel).ToPagedList(1, page));
+            }
         }
 
         [HttpGet]

@@ -2,12 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System;
 
 namespace PublishingHouse.Services.Algorithm
 {
     class SignatureAlgorithm : ISignatureAlgorithm
     {
+        private string defaultSignature;
+
         private Dictionary<int, char[]> alphabet;
+
+        public string GetDefaultSignature
+        {
+            get
+            {
+                if (defaultSignature == null)
+                    defaultSignature = string.Join("", Enumerable.Repeat(0, Alphabet.Count));
+
+                return defaultSignature;
+            }
+        }
+
         internal Dictionary<int, char[]> Alphabet
         {
             get

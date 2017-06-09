@@ -1,11 +1,10 @@
 ﻿using PublishingHouse.Services.Algorithm.Interface;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace PublishingHouse.Services.Algorithm
 {
-    public class NGramAlgorithm : INGramAlgorithm
+    internal class NGramAlgorithm : INGramAlgorithm
     {
         static int N { get; set; } = 3;
         public IEnumerable<string> GetNGramsCollection(string query)

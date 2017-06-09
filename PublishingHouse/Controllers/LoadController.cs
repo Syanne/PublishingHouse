@@ -14,12 +14,15 @@ namespace PublishingHouse.Controllers
     public class LoadController : Controller
     {
         private readonly IArticleWriteRepository articleWriteRepository;
+        private readonly ISignatureService signatureService;
         private readonly ISearchService searchService;
-        public LoadController(IArticleWriteRepository articleWriteRepository,
+        public LoadController(  IArticleWriteRepository articleWriteRepository,
+                                ISignatureService signatureService,
                                 ISearchService searchService)
         {
             this.searchService = searchService;
             this.articleWriteRepository = articleWriteRepository;
+            this.signatureService = signatureService;
         }
 
         [HttpGet]
@@ -43,6 +46,7 @@ namespace PublishingHouse.Controllers
                     ViewBag.Message = "File uploaded successfully";
                     await articleWriteRepository.AddArticle(article);
                     await searchService.DoIndexation(article);
+                    await signatureService.DoIndexation(article);
 
                     return RedirectToAction("Index", "Load");
                 }

@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to N-грамный алгоритм.
+        /// </summary>
+        public static string Ngram {
+            get {
+                return ResourceManager.GetString("Ngram", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Назад.
         /// </summary>
         public static string Prev {
@@ -183,6 +192,24 @@ namespace Resources {
         public static string SearchNav {
             get {
                 return ResourceManager.GetString("SearchNav", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to сигнатурный алгоритм.
+        /// </summary>
+        public static string Signature {
+            get {
+                return ResourceManager.GetString("Signature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to trie-дерево.
+        /// </summary>
+        public static string Trie {
+            get {
+                return ResourceManager.GetString("Trie", resourceCulture);
             }
         }
     }

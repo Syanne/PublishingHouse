@@ -144,6 +144,9 @@
   <data name="Next" xml:space="preserve">
     <value>Next</value>
   </data>
+  <data name="Ngram" xml:space="preserve">
+    <value>N-gram</value>
+  </data>
   <data name="Prev" xml:space="preserve">
     <value>Prev</value>
   </data>
@@ -158,5 +161,11 @@
   </data>
   <data name="SearchNav" xml:space="preserve">
     <value>search...</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>Signature</value>
+  </data>
+  <data name="Trie" xml:space="preserve">
+    <value>trie-tree</value>
   </data>
 </root>

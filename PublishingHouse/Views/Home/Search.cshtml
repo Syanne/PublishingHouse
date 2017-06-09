@@ -1,0 +1,17 @@
+﻿@using PublishingHouse.Models
+
+@model SearchRequest
+
+@using (Html.BeginForm("Search", "Home"))
+{
+    <input type="text" name="SearchString" class="col-lg-8 col-md-8 col-xs-12" style="max-width:1000px" value="@Model.SearchString" /><br /><br />
+    @Html.RadioButtonFor(m => m.SearchMode, SearchMode.NGram, new { id = SearchMode.NGram })
+    <label for=@SearchMode.NGram>@Resources.Resource.Ngram</label> <br />
+
+    @Html.RadioButtonFor(m => m.SearchMode, SearchMode.Signature, new { id = SearchMode.Signature })
+    <label for=@SearchMode.Signature>@Resources.Resource.Signature</label> <br />
+
+    @Html.RadioButtonFor(m => m.SearchMode, SearchMode.Trie, new { id = SearchMode.Trie })
+    <label for=@SearchMode.Trie>@Resources.Resource.Trie</label> <br />
+}
+

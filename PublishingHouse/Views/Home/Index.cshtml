@@ -14,10 +14,7 @@
 
     <div class="container" style="padding:0px">
         <div style="margin:10px 10px 10px 0px;" class="row">
-            @using (Html.BeginForm())
-            {
-                <input type="text" name="SearchString" class="col-lg-8 col-md-8 col-xs-12" style="max-width:1000px" />
-            }
+            @Html.Partial("Search", new PublishingHouse.Models.SearchRequest())
         </div>
         <div class="col-lg-8 col-md-8 col-xs-12">
             @foreach (var article in Model)

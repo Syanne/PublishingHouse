@@ -2,6 +2,7 @@
 using Autofac.Integration.Mvc;
 using PublishingHouse.Data;
 using PublishingHouse.Data.Entities;
+using PublishingHouse.SearchServices;
 using PublishingHouse.Services;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,7 @@ namespace PublishingHouse
 {
     public class MvcApplication : HttpApplication
     {
+        internal static IContainer container { get; private set; }
         protected void Application_Start()
         {
             var builder = new ContainerBuilder();
@@ -33,8 +35,9 @@ namespace PublishingHouse
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
             builder.RegisterModule(new DataDependencyBuilder());
             builder.RegisterModule(new ServicesDependencyBuilder());
+            builder.RegisterType<CustomizedSearchService>().As<ICustomizedSearchService>();
 
-            var container = builder.Build();
+            container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
